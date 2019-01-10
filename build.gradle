@@ -1,0 +1,40 @@
+apply plugin: 'groovy'
+apply plugin: 'maven'
+
+group = 'com.pgyer.upload'
+archivesBaseName = 'plugins'
+version = '0.1.0'
+sourceCompatibility = 1.6
+
+repositories {
+    mavenLocal()
+    jcenter()
+    google()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'org.json:json:20160212'
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'commons-lang:commons-lang:2.6'
+    runtime 'com.squareup.okhttp:okhttp:2.7.2'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0'
+}
+
+uploadArchives {  //当前项目可以发布到本地文件夹中
+    repositories {
+        mavenDeployer {
+            //定义本地maven仓库的地址
+//            repository(url: uri('../repo'))
+
+            //远程私服 或者 公共仓库 
+//            repository(url: "http:") {
+//                authentication(userName: "TODO", password: "TODO")
+//            }
+            pom.version = "0.1.0" // 对应版本号
+            pom.artifactId = "plugins" // 对应
+            pom.groupId = "com.pgyer.upload"
+        }
+    }
+}
